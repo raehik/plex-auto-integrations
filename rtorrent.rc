@@ -1,0 +1,29 @@
+# vim: ft=conf
+
+# global DL/UL rate in KiB.
+# (for unlimited, use 0)
+download_rate = 200
+upload_rate = 20
+
+# default directory to save downloaded torrents
+directory = ~/torrents/in-progress
+
+# Default session directory. Make sure you don't run multiple instance
+# of rtorrent using the same session directory. Perhaps using a
+# relative path?
+session = ~/torrents/.rt-session
+
+# stop torrents when removed from client
+schedule = untied_directory,5,5,stop_untied=
+
+# TODO ???
+schedule = tied_directory,5,5,start_tied=
+
+# close torrents when diskspace is low
+schedule = low_diskspace,5,60,close_low_diskspace=100M
+
+schedule = watch_dir_other, 10, 10, "load_start=~/torrents/watch/other/*.torrent, d.custom1.set=~/torrents/done-other"
+schedule = watch_dir_plex,  10, 10, "load_start=~/torrents/watch/plex/*.torrent,  d.custom1.set=~/torrents/done-plex, d.custom2.set=plex"
+
+#method.set_key = event.download.finished, move_complete, "d.directory.set=$d.custom1=; execute=mv,-u,$d.get_base_path=,$d.custom1="
+method.set_key = event.download.finished, move_complete, "d.directory.set=$d.custom1=; execute=mv,-u,$d.get_base_path=,$d.custom1=; execute=~/torrents/plex-cp-guess-name,$d.name=,$d.directory=,$d.custom2="

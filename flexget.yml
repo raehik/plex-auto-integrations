@@ -1,0 +1,18 @@
+tasks:
+  plex-new-nyaa:
+    rss: https://www.nyaa.se/?page=rss&term=horriblesubs+720p
+    series:
+      - Alice to Zouroku
+      - Shingeki no Kyojin S2
+      - Boku no Hero Academia
+      - Sakura Quest
+      - Sagrada Reset
+      - DanMachi Gaiden - Sword Oratoria
+      - Eromanga-sensei
+    download: ~/torrents/watch/plex
+
+  plex-new-asenshi:
+    rss: http://www.shanaproject.com/feeds/subber/Asenshi/
+    series:
+      - Little Witch Academia
+    download: ~/torrents/watch/plex

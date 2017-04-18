@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Guess the name of a series by its file name, and copy it to a media directory
+# under its series name, if given the correct argument.
+#
+
+series_name_placeholder="Unknown Series"
+
+media_dir="/mnt/plex-media"
+
+get_series_name() {
+    perl -ne 'print $1 if /.*\[.*?\] (.*?) - .*/' <<< "$1"
+}
+
+file_name="$1"
+file_dir="$2"
+torrent_type="$3"
+
+if [[ ! -f "$file_dir/$file_name" ]]; then
+    # $file_dir/$file_name isn't a regular file: can't do shit
+    return 1
+fi
+
+if [[ "$torrent_type" == "plex" ]]; then
+    series=$(get_series_name "$file_name")
+    if [[ -z "$series" ]]; then
+        series="$series_name_placeholder"
+    fi
+
+    mkdir -p "$media_dir/$series"
+    cp "$file_dir/$file_name" "$media_dir/$series"
+fi
