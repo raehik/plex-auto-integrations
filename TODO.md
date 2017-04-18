@@ -1,9 +1,3 @@
-General
--------
-
-  * Find everything involved in this project, put it in this repo ANONYMISED.
-
-
 rtorrent
 --------
 
